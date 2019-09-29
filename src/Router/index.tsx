@@ -1,8 +1,11 @@
 import React from 'react';
-import {HashRouter, Switch, Route, RouteComponentProps} from 'react-router-dom';
+import {BrowserRouter, Switch, Route, Redirect, RouteComponentProps} from 'react-router-dom';
+import {Error_404} from 'components';
 import ILayout from 'Layout';
 import TweenOne from 'rc-tween-one';
 import loadable from '@loadable/component';
+import routerConf from 'config/router';
+import {cloneDeep} from 'lodash-es';
 
 // Route 的接口
 interface RouteComponentInterface extends RouteComponentProps {
@@ -24,23 +27,22 @@ const tweenOneProps = {
 
 const IRouter: React.FC = () => {
     return (
-        <HashRouter>
+        <BrowserRouter>
             <ILayout>
                 <Switch>
-                    <Route exact={true}
-                           path='/'
-                           key='home'
-                           render={props => <TweenOne {...tweenOneProps}>
-                               <RouteComponent {...props} pagePath='home' />
-                           </TweenOne>} />
-                    <Route path='/about'
-                           key='about'
-                           render={props => <TweenOne {...tweenOneProps}>
-                               <RouteComponent {...props} pagePath='about' />
-                           </TweenOne>} />
+                    <Route path='/' exact={true} key='/' render={props => <Redirect to='/home/recommended' />} />
+                    {
+                        cloneDeep(routerConf).map(item => (<Route path={item.path}
+                                                                  key={item.menuId}
+                                                                  render={props => <TweenOne {...tweenOneProps}>
+                                                                      <RouteComponent {...props}
+                                                                                      pagePath={item.component} />
+                                                                  </TweenOne>} />))
+                    }
+                    <Route component={Error_404} />
                 </Switch>
             </ILayout>
-        </HashRouter>
+        </BrowserRouter>
     );
 };
 

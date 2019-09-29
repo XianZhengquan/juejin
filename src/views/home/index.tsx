@@ -1,10 +1,12 @@
 import React from 'react';
+import {useParams} from 'react-router-dom';
 
-const Home: React.FC = ({history}: any) => {
+const Home: React.FC = () => {
+    const {labelType} = useParams();
 
     return (
-        <article className='Home'>
-            <button onClick={() => history.push('/about')}>home</button>
+        <article className='home'>
+            当前数据类型 : {labelType}
         </article>
     );
 };
