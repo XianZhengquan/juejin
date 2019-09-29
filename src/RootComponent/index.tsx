@@ -1,7 +1,6 @@
 import React from 'react';
 import IRouter from 'Router';
 
-
 const RootComponent: React.FC = () => {
 
     return (

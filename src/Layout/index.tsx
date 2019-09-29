@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {LayoutHeader} from './components';
+import {LayoutHeader, MainHeader} from './components';
 import './index.less';
 
 const ILayout: React.FC = ({children}: any) => {
@@ -38,7 +38,7 @@ const ILayout: React.FC = ({children}: any) => {
             </header>
             <main className="layout-main">
                 <header className="layout-main-header" style={{transform: `translateY(${translateValue + 60}px)`}}>
-                    <article className="layout-main-header-container">header</article>
+                    <MainHeader />
                 </header>
                 <article className="layout-main-container">
                     {children}
