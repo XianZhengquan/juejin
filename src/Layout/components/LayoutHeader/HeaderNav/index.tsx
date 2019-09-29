@@ -1,5 +1,5 @@
 import React from 'react';
-import {Menu, Search, Write} from './components';
+import {Menu, Search, Write, Notification, AvatarMenu} from './components';
 import './index.less';
 
 const HeaderNav: React.FC = () => {
@@ -9,8 +9,8 @@ const HeaderNav: React.FC = () => {
             <section className="nav-item" style={{padding: 0}}><Menu /></section>
             <section className="nav-item search"><Search /></section>
             <section className="nav-item"><Write /></section>
-            <section className="nav-item">nav4</section>
-            <section className="nav-item">nav5</section>
+            <section className="nav-item"><Notification /></section>
+            <section className="nav-item" style={{paddingRight: 0}}><AvatarMenu /></section>
         </article>
     );
 };
