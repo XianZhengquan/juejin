@@ -31,12 +31,12 @@ const IRouter: React.FC = () => {
                            path='/'
                            key='home'
                            render={props => <TweenOne {...tweenOneProps}>
-                               <RouteComponent {...props} pagePath='Home' />
+                               <RouteComponent {...props} pagePath='home' />
                            </TweenOne>} />
                     <Route path='/about'
                            key='about'
                            render={props => <TweenOne {...tweenOneProps}>
-                               <RouteComponent {...props} pagePath='About' />
+                               <RouteComponent {...props} pagePath='about' />
                            </TweenOne>} />
                 </Switch>
             </ILayout>

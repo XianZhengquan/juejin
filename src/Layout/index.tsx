@@ -1,7 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
+import {LayoutHeader} from './components';
 import './index.less';
 
-const ILayout: React.FC = () => {
+const ILayout: React.FC = ({children}: any) => {
     // 滚动的值
     const [scrollValue, setScrollValue] = useState(0);
     // 上次、当前滚动的值
@@ -33,13 +34,14 @@ const ILayout: React.FC = () => {
     return (
         <article className='layout'>
             <header className="layout-header" style={{transform: `translateY(${translateValue}px)`}}>
-                <section className="layout-header-container">header</section>
+                <LayoutHeader />
             </header>
             <main className="layout-main">
                 <header className="layout-main-header" style={{transform: `translateY(${translateValue + 60}px)`}}>
-                    <section className="layout-main-header-container">header</section>
+                    <article className="layout-main-header-container">header</article>
                 </header>
                 <article className="layout-main-container">
+                    {children}
                     <p>开始</p>
                     <p>content</p>
                     <p>content</p>
