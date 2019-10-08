@@ -9,15 +9,13 @@ import './index.less';
  */
 interface ListOptionsProps {
     loading: boolean,
-    dataSource: Array<{ title: string, key: string | number }>
+    dataSource: Array<{
+        title: string,
+        key: string | number,
+        likeNums?: number,
+        commentNums?: number,
+    }>
 }
-
-const IconText = ({type, text}: any) => (
-    <span>
-    <Icon type={type} style={{marginRight: 8}} />
-        {text}
-  </span>
-);
 
 const Home: React.FC = () => {
     // 数据初始值
@@ -53,7 +51,14 @@ const Home: React.FC = () => {
     const getData = useCallback(async () => {
         setListOptions(v => ({...v, loading: true}));
         setTimeout(() => {
-            setListOptions(v => ({...v, loading: false, dataSource: [{title: '第一项', key: 1}]}));
+            setListOptions(v => ({
+                ...v,
+                loading: false,
+                dataSource: [
+                    {title: '第一项', key: 1, likeNums: 666, commentNums: 32},
+                    {title: '第二项', key: 2, likeNums: 1}
+                ]
+            }));
         }, 1000);
     }, []);
 
@@ -101,6 +106,8 @@ const Home: React.FC = () => {
                         {getOptions(hottestOptions)}
                     </Select>}
                 </header>
+
+                {/* 内容列表 */}
                 <main className="home-list-wrap">
                     {
                         listOptions.loading
@@ -110,17 +117,38 @@ const Home: React.FC = () => {
                                     dataSource={listOptions.dataSource}
                                     renderItem={item => (
                                         <List.Item className='list-item'
-                                                   key={item.key}
-                                                   actions={[
-                                                       <IconText type="star-o" text="156" key="list-vertical-star-o" />,
-                                                       <IconText type="like-o" text="156" key="list-vertical-like-o" />,
-                                                       <IconText type="message" text="2" key="list-vertical-message" />
-                                                   ]}>
-                                            {item.title}
+                                                   key={item.key}>
+                                            {/* 列表的头部 */}
+                                            <header className="list-item-header-wrap">
+                                                <section className="list-item-header-wrap-item menu">专栏</section>
+                                                <section className="list-item-header-wrap-item user">xianzhengquan
+                                                </section>
+                                                <section className="list-item-header-wrap-item time">17分钟前</section>
+                                                <section className="list-item-header-wrap-item tag">专栏</section>
+                                            </header>
+                                            {/* 列表的标题 */}
+                                            <section className="list-item-title">
+                                                <span>
+                                                    {item.title}
+                                                </span>
+                                            </section>
+                                            {/* 列表的操作 */}
+                                            <section className="list-item-action-wrap">
+                                                <div className="item like">
+                                                    <Icon type="like" theme='filled' />
+                                                    <span>{item.likeNums}</span>
+                                                </div>
+                                                <div className="item comment">
+                                                    <Icon type="message" theme='filled' />
+                                                    <span>{item.commentNums}</span>
+                                                </div>
+                                                <div className="item share">
+                                                    <Icon type="share-alt" />
+                                                </div>
+                                            </section>
                                         </List.Item>
                                     )} />
                     }
-
                 </main>
 
                 <p>
